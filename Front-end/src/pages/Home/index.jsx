@@ -1,5 +1,6 @@
 import { useState } from "react";
 import userIcon from "../../assets/icon-user.svg";
+import Button from "../../components/Button";
 import Header from "../../components/Header";
 
 import "./styles.scss";
@@ -35,6 +36,8 @@ export function Home() {
             <li key={index}>{JSON.stringify(row)}</li>
           ))}
         </ul>
+        <Button title="Validar" />
+        <Button title="Atualizar" />
       </div>
     </div>
   );
