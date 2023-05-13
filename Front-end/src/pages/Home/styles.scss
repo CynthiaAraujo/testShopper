@@ -1,0 +1,19 @@
+@import '/src/styles/theme';
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .mainHome {
+    background:$background-color;
+    padding: 3.2rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+  }
+};
