@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://homolog.planetasec.com.br/prova/front/api/clients",
+  baseURL: "",
 });
 
 export function uploadCsv(file) {
