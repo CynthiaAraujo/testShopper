@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import userIcon from "../../assets/icon-user.svg";
 import { Button } from "../../components/Button";
-import Header from "../../components/Header";
-import { updatePrices, validateFile } from "../../services/api";
+import { Header } from "../../components/Header";
+import { IValidatedProducts, updatePrices, validateFile } from "../../services/api";
 
 import "./styles.scss";
 
 export function Home() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [csvData, setCsvData] = useState([]);
+  const [selectedFile, setSelectedFile] = useState<Blob | null>(null);
+  const [csvData, setCsvData] = useState<IValidatedProducts[]>([]);
   const [allValidated, setAllValidated] = useState(false);
 
-  async function handleFileInput(event) {
-    setSelectedFile(event.target.files[0]);
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
+  async function handleFileInput(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files) {
+      setSelectedFile(event.target.files[0]);
+    }
   }
 
   async function handleValidation() {
+    if (!selectedFile) {
+      return toast.error('Selecione um arquivo.')
+    }
+
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
@@ -45,6 +53,15 @@ export function Home() {
     try {
       await updatePrices({ validatedProducts: csvData });
       toast.success("Preços atualizados com sucesso!");
+
+      setSelectedFile(null);
+
+      if (inputFileRef.current) {
+        inputFileRef.current.value = '';
+      }
+      
+      setCsvData([]);
+      setAllValidated(false);
     } catch (error) {
       toast.error(
         "Ocorreu um erro ao atualizar os preços. Por favor, tente novamente.",
@@ -56,21 +73,21 @@ export function Home() {
     <div className="homeContainer">
       <Header nameUser="Nome do Usuário" userIcon={userIcon} />
       <div className="mainHome">
-        <input type="file" onChange={handleFileInput} />
+        <input type="file" onChange={handleFileInput} ref={inputFileRef} />
         <ul>
           <li>
             <ul>
               {csvData.map(({ product, errorMessage }) => (
-                <li key={product.code}>
-                  <strong>Código:</strong> {product.code}
+                <li key={product?.code}>
+                  <strong>Código:</strong> {product?.code}
                   <br />
-                  <strong>Produto:</strong> {product.name}
+                  <strong>Produto:</strong> {product?.name}
                   <br />
-                  <strong>Preço de venda:</strong> R$ {product.sales_price}
+                  <strong>Preço de venda:</strong> R$ {product?.sales_price}
                   <br />
-                  <strong>Novo preço:</strong> R$ {product.new_price}
+                  <strong>Novo preço:</strong> R$ {product?.new_price}
                   <br />
-                  <strong>Mensagem de Erro:</strong> {errorMessage}
+                  <strong>Mensagem de Erro:</strong> {errorMessage ?? '-'}
                 </li>
               ))}
             </ul>
@@ -81,8 +98,7 @@ export function Home() {
           title="Atualizar"
           onClick={handleUpdate}
           disabled={!allValidated}
-          className={!allValidated ? "hideButton" : ""}
-          style={{ backgroundColor: "#2da77a" }}
+          className={!allValidated ? "hideButton" : "homeButton"}
         />
       </div>
     </div>

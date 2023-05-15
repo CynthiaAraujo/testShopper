@@ -1,7 +1,12 @@
 import logo from "../../assets/logo_shopper.svg";
 import "./styles.scss";
 
-function Header({ nameUser, userIcon }) {
+interface Props {
+  nameUser: string;
+  userIcon: string;
+}
+
+function Header({ nameUser, userIcon }: Props): JSX.Element {
   return (
     <div className="headerContainer">
       <img className="logo" src={logo} alt="Logo Shopper" />
@@ -13,4 +18,4 @@ function Header({ nameUser, userIcon }) {
   );
 }
 
-export default Header;
+export { Header };
