@@ -32,43 +32,32 @@ Funcionalidades:
    
 6. Renomeie o arquivo .env.example para .env
    
-7. Abra o arquivo .env em um editor de texto.
-   
-8. Preencha as variáveis de ambiente conforme necessário, como o host, porta e credenciais do banco de dados MySQL. Certifique-se de que as configurações correspondam às configurações do seu ambiente de desenvolvimento.
-   
-9.  Salve o arquivo .env após preencher as variáveis de ambiente.
+7. Certifique-se de que as configurações correspondam às configurações do seu ambiente de desenvolvimento. Se achar necessário, abra o arquivo .env em um editor de texto e altere as variáveis de ambiente conforme suas configurações locais de porta do servidor e credenciais do banco de dados MySQL.
 
-10.  Execute o comando `docker-compose up -d` para iniciar o ambiente de desenvolvimento, que inclui o banco de dados MySQL.
+8.   Execute o comando `docker-compose up -d` para iniciar o ambiente de desenvolvimento, que inclui o banco de dados MySQL.
 
-11. Aguarde até que o ambiente seja configurado corretamente. Isso pode levar alguns minutos.
+9.  Aguarde até que o ambiente seja configurado corretamente. Isso pode levar alguns minutos.
 
-12. Em um novo terminal, navegue até a pasta raiz do projeto.
+10. Em um novo terminal, navegue até a pasta raiz do projeto.
 
-13. Execute o comando `npm install` para instalar as dependências do projeto listadas no arquivo package.json.
+11. Execute o comando `npm install` para instalar as dependências do projeto listadas no arquivo package.json.
 
-14.  Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
+12.  Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
 
-15. Aguarde até que o servidor seja iniciado corretamente. Você verá uma mensagem indicando que o servidor está sendo executado na porta especificada.
+13. Aguarde até que o servidor seja iniciado corretamente. Você verá uma mensagem indicando que o servidor está sendo executado na porta especificada.
 
 
 ###  🚀 Tecnologias Utilizadas
 
-##### Back-end:
-
 - Node.js
 - TypeScript
+- Express
+- Prisma
 
 ##### Banco de dados:
 
  - MySQL
-
- 
-##### Front-end:
-
-- React.js
-- TypeScript
-- HTML
-- SASS
+ - Docker
 
 
 ---
