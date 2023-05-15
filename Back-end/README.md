@@ -17,7 +17,8 @@ Funcionalidades:
 - Atualização de preços: O sistema possui um botão "ATUALIZAR" que fica habilitado apenas se todos os produtos do arquivo estiverem validados e sem regras quebradas. Ao clicar nesse botão, o sistema salva o novo preço no banco de dados e deixa a tela pronta para o envio de um novo arquivo.
 - Atualização de preços de pacotes: Os preços de custo dos pacotes também são atualizados, sendo a soma dos custos dos seus componentes. Os preços de custo dos produtos que não são pacotes não são atualizados.
 
-### Testar a aplicação FRONT-END
+
+### Testar a aplicação BACK-END
 
 1. Certifique-se de ter o Node.js instalado em sua máquina. Caso não tenha, você pode baixá-lo em: https://nodejs.org/en/.
 
@@ -25,20 +26,42 @@ Funcionalidades:
 
 3. Descompacte o arquivo baixado, se necessário, ou navegue até a pasta raiz do projeto clonado.
 
-4. No terminal, navegue até a pasta raiz do projeto.
-   
-5. Execute o comando `npm install` para instalar as dependências do projeto listadas no arquivo package.json.
-   
-6.  Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
-   
-7.  Abra o navegador de sua preferência.
+4. Certifique-se de ter o Docker instalado em sua máquina. Caso não tenha, você pode baixá-lo em: https://www.docker.com/get-started.
 
-8.  Aguarde até que o servidor seja iniciado corretamente. Você verá uma mensagem indicando que o servidor está sendo executado na porta especificada.
+5. No terminal, navegue até a pasta raiz do projeto.
+   
+6. Renomeie o arquivo .env.example para .env
+   
+7. Abra o arquivo .env em um editor de texto.
+   
+8. Preencha as variáveis de ambiente conforme necessário, como o host, porta e credenciais do banco de dados MySQL. Certifique-se de que as configurações correspondam às configurações do seu ambiente de desenvolvimento.
+   
+9.  Salve o arquivo .env após preencher as variáveis de ambiente.
 
-9.  Acesse a aplicação em seu navegador, utilizando o endereço local: http://localhost:5173/.
+10.  Execute o comando `docker-compose up -d` para iniciar o ambiente de desenvolvimento, que inclui o banco de dados MySQL.
+
+11. Aguarde até que o ambiente seja configurado corretamente. Isso pode levar alguns minutos.
+
+12. Em um novo terminal, navegue até a pasta raiz do projeto.
+
+13. Execute o comando `npm install` para instalar as dependências do projeto listadas no arquivo package.json.
+
+14.  Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
+
+15. Aguarde até que o servidor seja iniciado corretamente. Você verá uma mensagem indicando que o servidor está sendo executado na porta especificada.
 
 
 ###  🚀 Tecnologias Utilizadas
+
+##### Back-end:
+
+- Node.js
+- TypeScript
+
+##### Banco de dados:
+
+ - MySQL
+
  
 ##### Front-end:
 
@@ -47,15 +70,6 @@ Funcionalidades:
 - HTML
 - SASS
 
-##### Back-end:
-
-- Node.js
-- TypeScript
-- 
-##### Banco de dados:
-
- - MySQL
-  
 
 ---
 
