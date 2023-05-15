@@ -1,0 +1,19 @@
+@import '/src/styles/theme';
+
+.buttonContainer{
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 0.8rem 1.2rem;
+  background: $button-color;
+
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+
+
+};
+
+
