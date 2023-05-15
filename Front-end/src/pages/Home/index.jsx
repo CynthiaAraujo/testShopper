@@ -11,31 +11,28 @@ export function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCsvData] = useState([]);
   const [allValidated, setAllValidated] = useState(false);
+  const [validationErrors, setValidationErrors] = useState([]);
 
   async function handleFileInput(event) {
     setSelectedFile(event.target.files[0]);
-
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-
-    try {
-      const results = await validateFile(formData);
-      setCsvData(results);
-      setAllValidated(false);
-      toast.success("Arquivo processado com sucesso!");
-    } catch (error) {
-      toast.error(
-        "Ocorreu um erro ao processar o arquivo. Por favor, tente novamente.",
-      );
-    }
   }
 
   async function handleValidation() {
     try {
-      const validatedProducts = await validateFile({ file: selectedFile });
+      const formData = new FormData();
+      formData.append("file", selectedFile);
 
+      const { validatedProducts } = await validateFile(formData);
+
+      setValidationErrors(
+        validatedProducts.filter((item) => item.errorMessage),
+      );
       setCsvData(validatedProducts);
-      setAllValidated(true);
+
+      if (validationErrors.length === 0) {
+        setAllValidated(true);
+      }
+
       toast.success("Arquivo validado com sucesso!");
     } catch (error) {
       toast.error(
@@ -46,7 +43,7 @@ export function Home() {
 
   async function handleUpdate() {
     try {
-      const updatedPrices = await updatePrices({ validatedProducts: csvData });
+      await updatePrices({ validatedProducts: csvData });
       toast.success("Preços atualizados com sucesso!");
     } catch (error) {
       toast.error(
@@ -62,7 +59,22 @@ export function Home() {
         <input type="file" onChange={handleFileInput} />
         <ul>
           {csvData.map((row, index) => (
-            <li key={index}>{JSON.stringify(row)}</li>
+            <li key={index}>
+              <ul>
+                {csvData.map((row, index) => (
+                  <li key={index}>
+                    <strong>Código:</strong> {row.product.code}
+                    <br />
+                    <strong>Produto:</strong> {row.product.name}
+                    <br />
+                    <strong>Preço de venda:</strong> R${" "}
+                    {row.product.sales_price}
+                    <br />
+                    <strong>Novo preço:</strong> R$ {row.product.new_price}
+                  </li>
+                ))}
+              </ul>
+            </li>
           ))}
         </ul>
         <Button title="Validar" onClick={handleValidation} />
@@ -70,6 +82,8 @@ export function Home() {
           title="Atualizar"
           onClick={handleUpdate}
           disabled={!allValidated}
+          className={!allValidated ? "hideButton" : ""}
+          style={{ backgroundColor: "#2da77a" }}
         />
       </div>
     </div>
