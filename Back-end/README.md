@@ -24,7 +24,7 @@ Funcionalidades:
 
 2. Baixe o arquivo .zip do projeto em sua máquina local ou clone o repositório público do projeto a partir do link do GitHub.
 
-3. Descompacte o arquivo baixado, se necessário, ou navegue até a pasta raiz do projeto clonado.
+3. Descompacte o arquivo baixado, se necessário, e navegue até a pasta que contém o aplicação back-end dentro da raiz do projeto clonado.
 
 4. Certifique-se de ter o Docker instalado em sua máquina. Caso não tenha, você pode baixá-lo em: https://www.docker.com/get-started.
 
