@@ -1,8 +1,8 @@
-require("dotenv/config");
-require("express-async-errors");
+import "dotenv/config";
+import "express-async-errors";
 
-const express = require("express");
-const routes = require('./routes');
+import express from "express";
+import { routes } from "./routes";
 
 const app = express();
 
