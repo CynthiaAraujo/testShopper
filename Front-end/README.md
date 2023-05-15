@@ -40,21 +40,11 @@ Funcionalidades:
 
 ###  🚀 Tecnologias Utilizadas
  
-##### Front-end:
-
 - React.js
 - TypeScript
 - HTML
 - SASS
-
-##### Back-end:
-
-- Node.js
-- TypeScript
-- 
-##### Banco de dados:
-
- - MySQL
+- Vite
   
 
 ---

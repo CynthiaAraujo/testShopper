@@ -11,7 +11,6 @@ export function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCsvData] = useState([]);
   const [allValidated, setAllValidated] = useState(false);
-  const [validationErrors, setValidationErrors] = useState([]);
 
   async function handleFileInput(event) {
     setSelectedFile(event.target.files[0]);
@@ -24,13 +23,14 @@ export function Home() {
 
       const { validatedProducts } = await validateFile(formData);
 
-      setValidationErrors(
-        validatedProducts.filter((item) => item.errorMessage),
-      );
+      const isAllValid = !validatedProducts.filter(
+        (product) => product.errorMessage,
+      ).length;
+
       setCsvData(validatedProducts);
 
-      if (validationErrors.length === 0) {
-        setAllValidated(true);
+      if (isAllValid) {
+        setAllValidated(isAllValid);
       }
 
       toast.success("Arquivo validado com sucesso!");
@@ -58,24 +58,23 @@ export function Home() {
       <div className="mainHome">
         <input type="file" onChange={handleFileInput} />
         <ul>
-          {csvData.map((row, index) => (
-            <li key={index}>
-              <ul>
-                {csvData.map((row, index) => (
-                  <li key={index}>
-                    <strong>Código:</strong> {row.product.code}
-                    <br />
-                    <strong>Produto:</strong> {row.product.name}
-                    <br />
-                    <strong>Preço de venda:</strong> R${" "}
-                    {row.product.sales_price}
-                    <br />
-                    <strong>Novo preço:</strong> R$ {row.product.new_price}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          <li>
+            <ul>
+              {csvData.map(({ product, errorMessage }) => (
+                <li key={product.code}>
+                  <strong>Código:</strong> {product.code}
+                  <br />
+                  <strong>Produto:</strong> {product.name}
+                  <br />
+                  <strong>Preço de venda:</strong> R$ {product.sales_price}
+                  <br />
+                  <strong>Novo preço:</strong> R$ {product.new_price}
+                  <br />
+                  <strong>Mensagem de Erro:</strong> {errorMessage}
+                </li>
+              ))}
+            </ul>
+          </li>
         </ul>
         <Button title="Validar" onClick={handleValidation} />
         <Button
